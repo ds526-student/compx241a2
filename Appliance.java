@@ -3,10 +3,10 @@ public class Appliance {
     private float price;
     private String name;
 
-    public Appliance(String category, float price, String name) {
-        this.category = category;
+    public Appliance(String name, String catergory, float price) {
         this.price = price;
         this.name = name;
+        this.category = catergory;
     }
 
     public String getCategory() {
@@ -23,24 +23,20 @@ public class Appliance {
     
     @Override
     public String toString() {
-        return name + "\t|\t" + category + "\t|\t$" + String.format("%.2f", price);
+        return category + "\t|\t" + name + "\t\t|\t$" + String.format("%.2f", price);
     }
 
     public int compareTo(Appliance other) {
-        // Compare by category first
-        int categoryComparison = this.category.compareTo(other.category);
-        if (categoryComparison != 0) {
-            return categoryComparison;
+        if (this.category.equals(other.category)) {
+            if (this.price == other.price) {
+                return this.name.compareTo(other.name);
+            } else if (this.price < other.price) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            return this.category.compareTo(other.category);
         }
-
-        // If categories are the same, compare by price
-        if (this.price < other.price) {
-            return -1;
-        } else if (this.price > other.price) {
-            return 1;
-        }   
-
-        // If both category and price are the same, compare by name
-        return this.name.compareTo(other.name);
     }
 }

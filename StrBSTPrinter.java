@@ -1,6 +1,6 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 /*
 https://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram-in-java
@@ -18,13 +18,13 @@ class StrBSTPrinter {
             return;
 
         int floor = maxLevel - level;
-        int endgeLines = (int) Math.pow(2, (Math.max(floor - 1, 0)));
-        int firstSpaces = (int) Math.pow(2, (floor)) - 1;
-        int betweenSpaces = (int) Math.pow(2, (floor + 1)) - 1;
+        int edgeLines = (int) Math.pow(2, Math.max(floor - 1, 0));
+        int firstSpaces = (int) Math.pow(2, floor) - 1;
+        int betweenSpaces = (int) Math.pow(2, floor + 1) - 1;
 
         StrBSTPrinter.printWhitespaces(firstSpaces);
 
-        List<Node> newNodes = new ArrayList<Node>();
+        List<Node> newNodes = new ArrayList<>();
         for (Node node : nodes) {
             if (node != null) {
                 System.out.print(node.value.getName());
@@ -41,11 +41,11 @@ class StrBSTPrinter {
 
         System.out.println("");
 
-        for (int i = 1; i <= endgeLines; i++) {
+        for (int i = 1; i <= edgeLines; i++) {
             for (int j = 0; j < nodes.size(); j++) {
                 StrBSTPrinter.printWhitespaces(firstSpaces - i);
                 if (nodes.get(j) == null) {
-                    StrBSTPrinter.printWhitespaces(endgeLines + endgeLines + i + 1);
+                    StrBSTPrinter.printWhitespaces(edgeLines + edgeLines + i + 1);
                     continue;
                 }
 
@@ -61,7 +61,7 @@ class StrBSTPrinter {
                 else
                     StrBSTPrinter.printWhitespaces(1);
 
-                StrBSTPrinter.printWhitespaces(endgeLines + endgeLines - i);
+                StrBSTPrinter.printWhitespaces(edgeLines + edgeLines - i);
             }
 
             System.out.println("");
