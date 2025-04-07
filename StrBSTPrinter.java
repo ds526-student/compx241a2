@@ -54,7 +54,7 @@ class StrBSTPrinter {
                 else
                     StrBSTPrinter.printWhitespaces(1);
 
-                StrBSTPrinter.printWhitespaces(i + i - 1);
+                StrBSTPrinter.printWhitespaces(i + i + 9);
 
                 if (nodes.get(j).right != null)
                     System.out.print("\\");

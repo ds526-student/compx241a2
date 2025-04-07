@@ -23,7 +23,7 @@ public class Appliance {
     
     @Override
     public String toString() {
-        return category + "\t|\t" + name + "\t\t|\t$" + String.format("%.2f", price);
+        return String.format("%-10s | %-20s | %10s", category, name, "$" + String.format("%,.2f", price));
     }
 
     public int compareTo(Appliance other) {

@@ -22,11 +22,11 @@ public class Program {
         System.out.println(a1.getPrice());
         System.out.println(a1.toString());
 
-        aBST.remove(a1);
-        aBST.search(a1);
-        aBST.getHeight();
-        aBST.getMinimum();
-        aBST.getMaximum();
+        System.out.println("Removing appliance: " + a1.getName());
+        System.out.println("Searching appliance: " + a1.getName());
+        System.out.println("Height: " + aBST.getHeight());
+        System.out.println("Minimum: " + aBST.getMinimum());
+        System.out.println("Maximum: " + aBST.getMaximum());
         aBST.print();
 
         System.out.println("-----------------");
@@ -41,19 +41,11 @@ public class Program {
         System.out.println("-----------------");
         System.out.println("Running BST operations on appliances: ");
 
-        aBST.remove(a1);
-        aBST.search(a1);
-        aBST.getHeight();
-        aBST.getMinimum();
-        aBST.getMaximum();
+        System.out.println("Removing appliance: " + a1.getName());
+        System.out.println("Searching appliance: " + a1.getName());
+        System.out.println("Height: " + aBST.getHeight());
+        System.out.println("Minimum: " + aBST.getMinimum());
+        System.out.println("Maximum: " + aBST.getMaximum());
         aBST.print();
     }
-
-
-    
-
-    
-
-
-    
 }

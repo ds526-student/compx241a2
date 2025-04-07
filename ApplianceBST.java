@@ -27,6 +27,10 @@ public class ApplianceBST {
         return getHeightOfSubtree(root);
     }
 
+    public void printCategory(String category) {
+        printCat(category);
+    }
+
     public Appliance getMinimum() {
         Node minNode = getMinimum(root);
         if (minNode != null) {
@@ -189,5 +193,12 @@ public class ApplianceBST {
     private Node RotateRightLeft(Node parent) {
         parent.right = RotateRight(parent.right);
         return RotateLeft(parent);
+    }
+
+    private void printCat(String c) {
+        // These functions shouldn’t iterate over the whole tree and filter the results, but instead only search the relevant branches of the tree. Add the following functions to ApplianceBST.java:
+        if (c.equals(root.value.getCategory())) {
+            System.out.println(root.value.toString());
+        }
     }
 }
