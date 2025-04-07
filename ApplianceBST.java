@@ -1,3 +1,8 @@
+//problems!!!!!!
+//search for category continues to search after it finds all relevvant items (BIG MAYBE AS THE BST ORDER MAY FUCK THIS)
+
+
+
 public class ApplianceBST {
 
     Node root;
@@ -28,7 +33,19 @@ public class ApplianceBST {
     }
 
     public void printCategory(String category) {
-        printCat(category);
+        printCat(root, category);
+    }
+
+    public void printCategoryWithPricecRange(String category, float minPrice, float maxPrice) {
+        printCatWithPriceRange(root, category, minPrice, maxPrice);
+    }
+
+    public void printCategoryAbovePrice(String category, float minPrice) {
+        printCatAbovePrice(root, category, minPrice);
+    }
+
+    public void printCategoryBelowPrice(String category, float maxPrice) {
+        printCatBelowPrice(root, category, maxPrice);
     }
 
     public Appliance getMinimum() {
@@ -60,7 +77,6 @@ public class ApplianceBST {
 
         int balance = getBalanceFactor(cRoot);
 
-        // Perform rotations if the node is unbalanced
         if (balance > 1) {
             if (a.compareTo(cRoot.left.value) < 0) {
                 return RotateRight(cRoot);
@@ -81,15 +97,17 @@ public class ApplianceBST {
     private boolean searchInSubtree(Node cRoot, Appliance a) {
         if (cRoot == null) return false;
         else if(cRoot.value == a) return true;
-        else if(a.compareTo(cRoot.value) < 0) return searchInSubtree(cRoot.left, a);
-        else if(a.compareTo(cRoot.value) > 0) return searchInSubtree(cRoot.right, a);
+        else if(a.compareTo(cRoot.value) < 0) 
+            return searchInSubtree(cRoot.left, a);
+        else if(a.compareTo(cRoot.value) > 0) 
+            return searchInSubtree(cRoot.right, a);
         return false;
     }
 
     private Node removeFromSubtree(Node cRoot, Appliance a) {
         if (cRoot == null) return null;
 
-        if (a.compareTo(a) < 0) {
+        if (a.compareTo(cRoot.value) < 0) { // Fixed incorrect comparison
             cRoot.left = removeFromSubtree(cRoot.left, a);
         } else if (a.compareTo(cRoot.value) > 0) {
             cRoot.right = removeFromSubtree(cRoot.right, a);
@@ -98,25 +116,22 @@ public class ApplianceBST {
             else if (cRoot.right == null) return cRoot.left;
             else {
                 Node minNode = getMinimum(cRoot.right);
-                cRoot.value = minNode.value;
-                cRoot.right = removeFromSubtree(cRoot.right, minNode.value);
+                cRoot.value = minNode.value; // Replace value with the minimum from the right subtree
+                cRoot.right = removeFromSubtree(cRoot.right, minNode.value); // Remove the duplicate node
             }
         }
 
         int balance = getBalanceFactor(cRoot);
-        if (balance > 1){
-            if (a.compareTo(cRoot.left.value) < 0) {
+        if (balance > 1) {
+            if (getBalanceFactor(cRoot.left) >= 0) { // Adjusted to check balance of left child
                 return RotateRight(cRoot);
-            }
-            else if (a.compareTo(cRoot.left.value) > 0) {
+            } else {
                 return RotateLeftRight(cRoot);
             }
-        }
-        else if (balance < -1){
-            if (a.compareTo(cRoot.right.value) < 0) {
+        } else if (balance < -1) {
+            if (getBalanceFactor(cRoot.right) <= 0) { // Adjusted to check balance of right child
                 return RotateLeft(cRoot);
-            }
-            else if (a.compareTo(cRoot.right.value) > 0) {
+            } else {
                 return RotateRightLeft(cRoot);
             }
         }
@@ -195,10 +210,84 @@ public class ApplianceBST {
         return RotateLeft(parent);
     }
 
-    private void printCat(String c) {
-        // These functions shouldn’t iterate over the whole tree and filter the results, but instead only search the relevant branches of the tree. Add the following functions to ApplianceBST.java:
-        if (c.equals(root.value.getCategory())) {
-            System.out.println(root.value.toString());
+    private void printCat(Node cRoot, String c) {
+        if (cRoot == null) return;
+
+        int compare = cRoot.value.getCategory().compareTo(c);
+
+        if (compare == 0) {
+            printCat(cRoot.left, c);
+            printCat(cRoot.right, c);
+            System.out.println(cRoot.value.toString());
+        }
+        else if (compare > 0) {
+            printCat(cRoot.left, c);
+
+        } else {
+            printCat(cRoot.right, c);
+        }
+    }
+
+    private void printCatWithPriceRange(Node cRoot, String c, float minPrice, float maxPrice) {
+        if (cRoot == null) return;
+        
+        int compare = cRoot.value.getCategory().compareTo(c);
+
+        if (compare == 0) {
+            printCatWithPriceRange(cRoot.left, c, minPrice, maxPrice);
+            printCatWithPriceRange(cRoot.right, c, minPrice, maxPrice);
+            if (cRoot.value.getPrice() > minPrice && cRoot.value.getPrice() < maxPrice)
+            {
+                System.out.println(cRoot.value.toString());
+            }
+        }
+        else if (compare > 0) {
+            printCatWithPriceRange(cRoot.left, c, minPrice, maxPrice);
+
+        } else {
+            printCatWithPriceRange(cRoot.right, c, minPrice, maxPrice);
+        }
+    }
+
+    private void printCatAbovePrice(Node cRoot, String c, float minPrice){
+        if (cRoot == null) return;
+        
+        int compare = cRoot.value.getCategory().compareTo(c);
+
+        if (compare == 0) {
+            printCatAbovePrice(cRoot.left, c, minPrice);
+            printCatAbovePrice(cRoot.right, c, minPrice);
+            if (cRoot.value.getPrice() > minPrice)
+            {
+                System.out.println(cRoot.value.toString());
+            }
+        }
+        else if (compare > 0) {
+            printCatAbovePrice(cRoot.left, c, minPrice);
+
+        } else {
+            printCatAbovePrice(cRoot.right, c, minPrice);
+        }
+    }
+
+    private void printCatBelowPrice(Node cRoot, String c, float maxPrice){
+        if (cRoot == null) return;
+        
+        int compare = cRoot.value.getCategory().compareTo(c);
+
+        if (compare == 0) {
+            printCatBelowPrice(cRoot.left, c, maxPrice);
+            printCatBelowPrice(cRoot.right, c, maxPrice);
+            if (cRoot.value.getPrice() < maxPrice)
+            {
+                System.out.println(cRoot.value.toString());
+            }
+        }
+        else if (compare > 0) {
+            printCatBelowPrice(cRoot.left, c, maxPrice);
+
+        } else {
+            printCatBelowPrice(cRoot.right, c, maxPrice);
         }
     }
 }
