@@ -26,14 +26,14 @@ public class Program {
 
         System.out.println("Removing appliance: " + a1.getName());
         aBST.remove(a1);
-        aBST.search(a1);
-        System.out.println("Searching appliance: " + a1.getName() + " = " + found);
+        aBST.search(a2);
+        System.out.println("Searching appliance: " + a2.getName() + " = " + found);
         System.out.println("Height: " + aBST.getHeight());
         System.out.println("Minimum: " + aBST.getMinimum());
         System.out.println("Maximum: " + aBST.getMaximum());
         aBST.print();
 
-        System.out.println("\n-----------------\n");
+        System.out.println("\n-------------------------------------\n");
         System.out.println("Inserting appliances into the BST: ");
 
         for (Appliance appliance : appliances) {
@@ -42,32 +42,32 @@ public class Program {
 
         aBST.print();
 
-        System.out.println("\n-----------------\n");
+        System.out.println("\n-------------------------------------\n");
         System.out.println("Running BST operations on appliances: ");
 
         System.out.println("Removing appliance: " + a1.getName());
         aBST.remove(a1);
-        found = aBST.search(a1);
-        System.out.println("Searching appliance: " + a1.getName() + " = " + found);
+        found = aBST.search(a2);
+        System.out.println("Searching appliance: " + a2.getName() + " = " + found);
         System.out.println("Height: " + aBST.getHeight());
         System.out.println("Minimum: " + aBST.getMinimum());
         System.out.println("Maximum: " + aBST.getMaximum());
         aBST.print();
 
 
-        System.out.println("\n-----------------\n");
+        System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category");
         aBST.printCategory("Fridge");
 
-        System.out.println("\n-----------------\n");
+        System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category and price range");
         aBST.printCategoryWithPricecRange("Fridge", 5000.21f, 15000.23f);
         
-        System.out.println("\n-----------------\n");
+        System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category and minimum price");
         aBST.printCategoryAbovePrice("Fridge", 5000f);
 
-        System.out.println("\n-----------------\n");
+        System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category and maximum price");
         aBST.printCategoryBelowPrice("Fridge", 5000f);
 

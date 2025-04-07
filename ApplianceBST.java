@@ -1,5 +1,6 @@
 //problems!!!!!!
 //search for category continues to search after it finds all relevvant items (BIG MAYBE AS THE BST ORDER MAY FUCK THIS)
+//search for category doesn't print in price descending order
 
 
 
@@ -93,15 +94,13 @@ public class ApplianceBST {
 
         return cRoot;
     }
-
     private boolean searchInSubtree(Node cRoot, Appliance a) {
         if (cRoot == null) return false;
-        else if(cRoot.value == a) return true;
-        else if(a.compareTo(cRoot.value) < 0) 
+        else if (a.compareTo(cRoot.value) == 0) return true;
+        else if (a.compareTo(cRoot.value) < 0) 
             return searchInSubtree(cRoot.left, a);
-        else if(a.compareTo(cRoot.value) > 0) 
+        else
             return searchInSubtree(cRoot.right, a);
-        return false;
     }
 
     private Node removeFromSubtree(Node cRoot, Appliance a) {
@@ -236,8 +235,7 @@ public class ApplianceBST {
         if (compare == 0) {
             printCatWithPriceRange(cRoot.left, c, minPrice, maxPrice);
             printCatWithPriceRange(cRoot.right, c, minPrice, maxPrice);
-            if (cRoot.value.getPrice() > minPrice && cRoot.value.getPrice() < maxPrice)
-            {
+            if (cRoot.value.getPrice() > minPrice && cRoot.value.getPrice() < maxPrice) {
                 System.out.println(cRoot.value.toString());
             }
         }
