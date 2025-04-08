@@ -1,6 +1,9 @@
+
+import java.util.ArrayList;
+
 //problems!!!!!!
 //search for category continues to search after it finds all relevvant items (BIG MAYBE AS THE BST ORDER MAY FUCK THIS)
-//search for category doesn't print in price descending order
+//search for category doesn't print in price descending order, could use bubble sort or attempt to use the appliance compare to method
 
 
 
@@ -218,11 +221,16 @@ public class ApplianceBST {
         if (cRoot == null) return;
 
         int compare = cRoot.value.getCategory().compareTo(c);
+        ArrayList<Appliance> appliances = new ArrayList<>();
 
         if (compare == 0) {
             printCat(cRoot.left, c);
             printCat(cRoot.right, c);
-            System.out.println(cRoot.value.toString());
+            appliances.add(cRoot.value);
+            bubbleSort(appliances.toArray(new Appliance[0]));
+            for (Appliance appliance : appliances) {
+                System.out.println(appliance.toString());
+            }
         }
         else if (compare > 0) {
             printCat(cRoot.left, c);
@@ -236,12 +244,17 @@ public class ApplianceBST {
         if (cRoot == null) return;
         
         int compare = cRoot.value.getCategory().compareTo(c);
+        ArrayList<Appliance> appliances = new ArrayList<>();
 
         if (compare == 0) {
             printCatWithPriceRange(cRoot.left, c, minPrice, maxPrice);
             printCatWithPriceRange(cRoot.right, c, minPrice, maxPrice);
             if (cRoot.value.getPrice() > minPrice && cRoot.value.getPrice() < maxPrice) {
-                System.out.println(cRoot.value.toString());
+                appliances.add(cRoot.value);
+                bubbleSort(appliances.toArray(new Appliance[0]));
+                for (Appliance appliance : appliances) {
+                    System.out.println(appliance.toString());
+                }
             }
         }
         else if (compare > 0) {
@@ -256,13 +269,18 @@ public class ApplianceBST {
         if (cRoot == null) return;
         
         int compare = cRoot.value.getCategory().compareTo(c);
+        ArrayList<Appliance> appliances = new ArrayList<>();
 
         if (compare == 0) {
             printCatAbovePrice(cRoot.left, c, minPrice);
             printCatAbovePrice(cRoot.right, c, minPrice);
             if (cRoot.value.getPrice() > minPrice)
             {
-                System.out.println(cRoot.value.toString());
+                appliances.add(cRoot.value);
+                bubbleSort(appliances.toArray(new Appliance[0]));
+                for (Appliance appliance : appliances) {
+                    System.out.println(appliance.toString());
+                }
             }
         }
         else if (compare > 0) {
@@ -277,13 +295,18 @@ public class ApplianceBST {
         if (cRoot == null) return;
         
         int compare = cRoot.value.getCategory().compareTo(c);
+        ArrayList<Appliance> appliances = new ArrayList<>();
 
         if (compare == 0) {
             printCatBelowPrice(cRoot.left, c, maxPrice);
             printCatBelowPrice(cRoot.right, c, maxPrice);
             if (cRoot.value.getPrice() < maxPrice)
             {
-                System.out.println(cRoot.value.toString());
+                appliances.add(cRoot.value);
+                bubbleSort(appliances.toArray(new Appliance[0]));
+                for (Appliance appliance : appliances) {
+                    System.out.println(appliance.toString());
+                }
             }
         }
         else if (compare > 0) {
@@ -291,6 +314,19 @@ public class ApplianceBST {
 
         } else {
             printCatBelowPrice(cRoot.right, c, maxPrice);
+        }
+    }
+
+    private void bubbleSort(Appliance[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - 1; j++) {
+                if (arr[j].getPrice() < arr[j + 1].getPrice()) {
+                    Appliance temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
         }
     }
 }
