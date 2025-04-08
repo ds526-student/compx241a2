@@ -34,18 +34,22 @@ public class ApplianceBST {
     }
 
     public void printCategory(String category) {
+        System.out.println("Printing all items in category " + category);
         printCat(root, category);
     }
 
     public void printCategoryWithPricecRange(String category, float minPrice, float maxPrice) {
+        System.out.println("Printing all items in category " + category + " within the price range $" + String.format("%,.2f", minPrice) + " -> $" + String.format("%,.2f", maxPrice));
         printCatWithPriceRange(root, category, minPrice, maxPrice);
     }
 
     public void printCategoryAbovePrice(String category, float minPrice) {
+        System.out.println("Printing all items in category " + category + " above the price $" + String.format("%,.2f", minPrice));
         printCatAbovePrice(root, category, minPrice);
     }
 
     public void printCategoryBelowPrice(String category, float maxPrice) {
+        System.out.println("Printing all items in category " + category + " below the price $" + String.format("%,.2f", maxPrice));
         printCatBelowPrice(root, category, maxPrice);
     }
 
@@ -94,6 +98,7 @@ public class ApplianceBST {
 
         return cRoot;
     }
+    
     private boolean searchInSubtree(Node cRoot, Appliance a) {
         if (cRoot == null) return false;
         else if (a.compareTo(cRoot.value) == 0) return true;

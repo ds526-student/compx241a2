@@ -49,6 +49,7 @@ public class Program {
         aBST.remove(a1);
         found = aBST.search(a2);
         System.out.println("Searching appliance: " + a2.getName() + " = " + found);
+        aBST.insert(a8);
         System.out.println("Height: " + aBST.getHeight());
         System.out.println("Minimum: " + aBST.getMinimum());
         System.out.println("Maximum: " + aBST.getMaximum());
@@ -70,6 +71,5 @@ public class Program {
         System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category and maximum price");
         aBST.printCategoryBelowPrice("Fridge", 5000f);
-
     }
 }
