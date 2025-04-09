@@ -55,10 +55,10 @@ public class Appliance {
      * @return
      */
     public int compareTo(Appliance other) {
-        if (this.category.equals(other.category)) {
-            if (this.price == other.price) {
-                return this.name.compareTo(other.name);
-            } else if (this.price < other.price) {
+        if (this.category.equals(other.category)) { // compare by category first
+            if (this.price == other.price) { // if the price is the same, compare by name
+                return this.name.compareTo(other.name); 
+            } else if (this.price < other.price) {  // if the price is different, compare by price
                 return -1;
             } else {
                 return 1;

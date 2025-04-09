@@ -1,6 +1,9 @@
 
 import java.util.List;
 
+/**
+ * this class is the main testing class for the program
+ */
 public class Program {
     public static void main(String[] args) {
         ApplianceBST aBST = new ApplianceBST();
@@ -17,6 +20,7 @@ public class Program {
 
         List<Appliance> appliances = List.of(a1, a2, a3, a4, a5, a6, a7, a8);
 
+        // testing all methods before adding appliances to the BST
         System.out.println("Running BST operations on appliances: ");
 
         System.out.println(a1.getCategory());
@@ -40,6 +44,7 @@ public class Program {
             aBST.insert(appliance);
         }
 
+        // testing all methods after adding appliances to the BST
         aBST.print();
 
         System.out.println("\n-------------------------------------\n");
@@ -55,10 +60,13 @@ public class Program {
         System.out.println("Maximum: " + aBST.getMaximum());
         aBST.print();
 
-
         System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category");
         aBST.printCategory("Fridge");
+
+        System.out.println("\n-------------------------------------\n");
+        System.out.println("Printing items of category");
+        aBST.printCategory("Hello");
 
         System.out.println("\n-------------------------------------\n");
         System.out.println("Printing items of category and price range");

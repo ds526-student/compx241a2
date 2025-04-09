@@ -2,8 +2,8 @@
  * node class representing each node in a binary search tree
  */
 public class Node {
-    public Appliance value;
-    public Node left, right;
+    public Appliance value; // the appliance value stored in the node
+    public Node left, right; // pointers to the left and right child nodes
 
     /**
      * constructor to create a new node with the given appliance value
