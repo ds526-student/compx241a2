@@ -1,6 +1,6 @@
 public class ApplianceBST {
 
-    Node root; // the root of the BST
+    Node root; // the root of the BSTzz
 
     /**
      * constructor for the ApplianceBST class

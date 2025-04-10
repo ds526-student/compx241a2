@@ -54,98 +54,104 @@ public class ApplianceLookup{
             System.out.println("\n---------------------------------------\n");
 
             // check the user's choice and call the appropriate method
-            if (choice.equals("1")){ // search for an appliance
-                Appliance a = createAppliance();
-
-                System.out.println(a.toString()); 
-                boolean found = aBST.search(a);
-                System.out.println("Searching appliance: " + a.getName() + " = " + found);
-            }
-            else if (choice.equals("2")){ // add a new appliance
-                Appliance a = createAppliance();
-
-                if (aBST.search(a)){ // check if the appliance already exists, else add it to the BST
-                    System.out.println("The item " + a.getName() + " already exists within the Binary Search Tree");
-                }
-                else {
-                    aBST.insert(a);
-                    aBST.print();
-                    System.out.println("Appliance " + a.getName() + " has been added to the Binary Search Tree");
-                }
-            }
-            else if (choice.equals("3")){ // remove an appliance
-                Appliance a = createAppliance();
-
-                if (aBST.search(a) == false){ // check if the appliance exists, else remove it from the BST
-                    System.out.println("Appliance " + a.getName() + " does not exist within the Binary Search Tree");
-                }
-                else{
-                    aBST.remove(a);
-                    aBST.print();
-                    System.out.println("Appliance " + a.getName() + " has been removed from the Binary Search Tree");
-                }
-            }
-            else if (choice.equals("4")){ // search for all items in a given category
-                System.out.println("What category would you like to print?");
-                choice = scan.nextLine();
-
-                aBST.printCategory(choice);
-            }
-            else if (choice.equals("5")){ // search a category within a price range
-                // get the users choice for what type of range they would like to use
-                System.out.println("Please enter a number based on how you would like to search the category");
-                System.out.println("1. Minimum Price only");
-                System.out.println("2. Maximum Price only");
-                System.out.println("3. Both a Minimum and Maximum Price");
-                choice = scan.nextLine();
-                float minPrice = 0.0f; // minimum price
-                float maxPrice = 0.0f; // maximum price
-
-                System.out.println("What category would you like to print?");
-                String category = scan.nextLine();
-
-                // check the user's choice and call the appropriate method
-                if (choice.equals("1")){ // minimum price only
-                    System.out.println("Please enter your minimum price");
-                    minPrice = floatError();
-
-                    aBST.printCategoryAbovePrice(category, minPrice);
-                }
-                else if (choice.equals("2")){ // maximum price only
-                    System.out.println("Please enter your maximum price");
-                    maxPrice = floatError();
-
-                    aBST.printCategoryBelowPrice(category, maxPrice);
-                }
-                else if (choice.equals("3")){ // both a minimum and maximum price
-                    boolean validPrices = false;
-                    
-                    while (!validPrices) {
+            switch (choice) {
+                case "1":
+                    {
+                        // search for an appliance
+                        Appliance a = createAppliance();
+                        System.out.println(a.toString());
+                        boolean found = aBST.search(a);
+                        System.out.println("Searching appliance: " + a.getName() + " = " + found);
+                        break;
+                    }
+                case "2":
+                    {
+                        // add a new appliance
+                        Appliance a = createAppliance();
+                        if (aBST.search(a)){ // check if the appliance already exists, else add it to the BST
+                            System.out.println("The item " + a.getName() + " already exists within the Binary Search Tree");
+                        }
+                        else {
+                            aBST.insert(a);
+                            aBST.print();
+                            System.out.println("Appliance " + a.getName() + " has been added to the Binary Search Tree");
+                        }       break;
+                    }
+                case "3":
+                    {
+                        // remove an appliance
+                        Appliance a = createAppliance();
+                        if (aBST.search(a) == false){ // check if the appliance exists, else remove it from the BST
+                            System.out.println("Appliance " + a.getName() + " does not exist within the Binary Search Tree");
+                        }
+                        else{
+                            aBST.remove(a);
+                            aBST.print();
+                            System.out.println("Appliance " + a.getName() + " has been removed from the Binary Search Tree");
+                        }       break;
+                    }
+                case "4":
+                    // search for all items in a given category
+                    System.out.println("What category would you like to print?");
+                    choice = scan.nextLine();
+                    aBST.printCategory(choice);
+                    break;
+                case "5":
+                    // search a category within a price range
+                    // get the users choice for what type of range they would like to use
+                    System.out.println("Please enter a number based on how you would like to search the category");
+                    System.out.println("1. Minimum Price only");
+                    System.out.println("2. Maximum Price only");
+                    System.out.println("3. Both a Minimum and Maximum Price");
+                    choice = scan.nextLine();
+                    float minPrice = 0.0f; // minimum price
+                    float maxPrice = 0.0f; // maximum price
+                    System.out.println("What category would you like to print?");
+                    String category = scan.nextLine();
+                    // check the user's choice and call the appropriate method
+                    if (choice.equals("1")){ // minimum price only
                         System.out.println("Please enter your minimum price");
                         minPrice = floatError();
         
+                        aBST.printCategoryAbovePrice(category, minPrice);
+                    }
+                    else if (choice.equals("2")){ // maximum price only
                         System.out.println("Please enter your maximum price");
                         maxPrice = floatError();
-
-                        if (minPrice < maxPrice) {
-                            validPrices = true;
-                        }
-                        else {
-                            System.out.println("Please ensure that your minimum price is set lower than your maximum price");
-                        }
+                        
+                        aBST.printCategoryBelowPrice(category, maxPrice);
                     }
-
-                    aBST.printCategoryWithPricecRange(category, minPrice, maxPrice);
-                }
-                else {
-                    System.out.println("Invalid input please try again");
-                }
-            }
-            else if (choice.equals("6")){ // close the program
-                continueRunning = false;
-            }
-            else { // invalid input
-                System.out.println("Invalid input please try again.");
+                    else if (choice.equals("3")){ // both a minimum and maximum price
+                        boolean validPrices = false;
+                        
+                        while (!validPrices) {
+                            System.out.println("Please enter your minimum price");
+                            minPrice = floatError();
+                            
+                            System.out.println("Please enter your maximum price");
+                            maxPrice = floatError();
+                            
+                            if (minPrice < maxPrice) {
+                                validPrices = true;
+                            }
+                            else {
+                                System.out.println("Please ensure that your minimum price is set lower than your maximum price");
+                            }
+                        }
+                        
+                        aBST.printCategoryWithPricecRange(category, minPrice, maxPrice);
+                    }
+                    else {
+                        System.out.println("Invalid input please try again");
+                    }   break;
+                case "6":
+                    // close the program
+                    continueRunning = false;
+                    break;
+                default:
+                    // invalid input
+                    System.out.println("Invalid input please try again.");
+                    break;
             }
             System.out.println("Press Enter to continue: ");
             scan.nextLine();
